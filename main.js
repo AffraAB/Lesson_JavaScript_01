@@ -122,7 +122,7 @@ for(let i = 0; i < persons.length; i++) {
 // Lambda loop
 persons.forEach(x => console.log(x));
 
-// Objects
+// Objects: Key : Value
 let mike = {
     firstName: 'Mike',
     lastName: 'Bäck',
@@ -136,3 +136,152 @@ console.log(`First name: ${mike.firstName}`);
 console.log(`First name: ${mike["firstName"]}`);
 let mikeStr = `${mike.firstName} ${mike.lastName}, age: ${mike.age}`;
 console.log(mikeStr);
+
+let mikeAdvanced = {
+    firstName: 'Mike',
+    lastName: 'Bäck',
+    age: 38,
+    hobbies: ['music', 'programming', 'reading', 'games']
+};
+
+console.log(mikeAdvanced); // Object
+let mikeJSON = JSON.stringify(mikeAdvanced); // Object to JSON
+console.log(mikeJSON); 
+console.log(JSON.parse(mikeJSON)); // Back to object
+
+// Loop over object
+for(let propertyName in mikeAdvanced) {
+    let propertyValue = mikeAdvanced[propertyName];
+    console.log(propertyName, propertyValue);
+}
+
+// let peopleArray = [{
+//     "id": 1,
+//     "first_name": "Colby",
+//     "email": "cklulicek0@goo.gl"
+//   }, {
+//     "id": 2,
+//     "first_name": "Waldon",
+//     "email": "wscopyn1@digg.com"
+//   }, {
+//     "id": 3,
+//     "first_name": "Genny",
+//     "email": "gscholer2@1und1.de"
+//   }, {
+//     "id": 4,
+//     "first_name": "Donnie",
+//     "email": "dbinyon3@lycos.com"
+//   }, {
+//     "id": 5,
+//     "first_name": "Jaine",
+//     "email": "jmcgreil4@purevolume.com"
+//   }];
+
+//   for(let person of peopleArray) {
+//     console.log(`Name: ${person.first_name} has ${person.email}`);
+//   }
+
+// Loop through object and array inside of object
+for(let propertyName in mikeAdvanced) {                      // Loop over object
+    let propertyValue = mikeAdvanced[propertyName];          // Get value from key
+    if(Array.isArray(propertyValue) === true) {              // Check if array?
+        for(let hobby of propertyValue) {                    // Loop over array
+            console.log("Hobby: " + hobby);
+        }
+    } else {
+        console.log(propertyName + " : " + propertyValue);
+    }
+}
+
+// Connection to HTML
+// Ask JS to create a new element
+let myDiv = document.createElement('div');
+// Add some HTML
+myDiv.innerHTML = `
+    <h1>Hello from JS!</h1>
+    <p>This text is from JavaScript, my age is ${mike.age}</p>
+`;
+
+// Grab the body tag
+let body = document.querySelector('body');
+
+// Add the div to the HTML
+body.append(myDiv);
+
+// Another way to add data
+let myBands = [
+{
+    name: 'The Beatles',
+    genre: 'Pop'
+},
+{
+    name: 'The Rolling Stones',
+    genre: 'Rock'
+}
+];
+
+// Grab the bands div
+let bandsDiv = document.querySelector('#bands');
+for(let band of myBands) {
+    bandsDiv.innerHTML += `
+        <div class="band">
+          <h2>${band.name}</h2>
+          <p>Genre: ${band.genre}</p>
+        </div>
+    `;
+}
+
+// Functions
+function sayHello() {
+    console.log('Hello');
+}
+
+const sayHello2 = () => {
+    console.log('Hello 2');
+}
+
+sayHello();
+sayHello2();
+
+// Different ways of declaring the same function
+// Function declaration
+function add(a, b) {
+    return a + b;
+}
+// Arrow function
+const add2 = (a, b) => {
+    return a + b;
+}
+// Function expression
+const add3 = function(a, b) {
+    return a + b;
+}
+
+// Arrow function with implicit return
+const add4 = (a, b) => a + b;
+
+// Arrow function with implicit return and one parameter
+const add5 = a => a + 5;
+
+console.log(add(1, 2));
+console.log(add2(1, 2));
+console.log(add3(1, 2));
+console.log(add4(1, 2));
+console.log(add5(1));
+
+// Classes
+class Person {
+    constructor(name, age, hobby) { // Fields of the class
+        this.name = name;
+        this.age = age;
+        this.hobby = hobby;
+    }
+
+    greetings() { // Class methods
+        console.log(`Hi, my name is ${this.name} and I am ${this.age}`);
+        console.log('I enjoy: ' + this.hobby);
+    }
+}
+const mikeClass = new Person('Mike', 38, 'Music');
+mikeClass.greetings();
+console.log(mikeClass.hobby);
